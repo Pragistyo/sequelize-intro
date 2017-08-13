@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Students</title>
+  </head>
+  <body>
+    <h1>Add Students</h1>
+
+    <br><br>
+    <form action="/students/addstudents" method="post">
+      <fieldset>
+        <input type="text" name="first_name" placeholder="Input your First Name"><br>
+        <input type="text" name="last_name" placeholder="Input your Last Name"><br>
+        <input type="text" name="email" placeholder="Input your Email"><br>
+
+        <button type="submit">Add students</button>
+      </fieldset>
+    </form>
+    <br>
+    <% if(err_msg){ %>
+      <p> <%= err_msg %></p>
+    <% } %>
+    <br>
+    <a href="/students">Show All Data</a>
+  </body>
+</html>

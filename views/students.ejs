@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Students</title>
+  </head>
+  <body>
+    <h1>Students Data</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%dataStudents.forEach(z=> { %>
+          <tr>
+            <td><%= z.id %></td>
+            <td><%= z.first_name %></td>
+            <td><%= z.last_name %></td>
+            <td><%= z.full_name %></td>
+            <td><%= z.email %></td>
+            <td><a href="/students/edit/<%=z.id%>">Edit</a> | <a href="/students/delete/<%=z.id%>"onclick="return confirm('delete this student?');">Delete</a> </td>
+
+          </tr>
+        <% })%>
+      </tbody>
+    </table>
+    <a href="/students/addstudents">Add</a>
+    <br><br>
+    <!-- <form action="/address" method="post">
+      <fieldset>
+        <input type="text" name="street" placeholder="Input street"><br>
+        <input type="text" name="city" placeholder="Input city"><br>
+        <input type="text" name="zip_code" placeholder="Input zip_code"><br>
+
+        <button type="submit">save</button>
+      </fieldset>
+    </form> -->
+    <a href="/">Home</a>
+  </body>
+</html>
