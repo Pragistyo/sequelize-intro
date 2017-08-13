@@ -47,13 +47,36 @@ router.post('/edit/:id', (req, res)=>{
 
     .catch(err=>{
       // console.log("ada error di get update student");
-      dbs.Student.findById(req.params.id)
+      pret.Student.findById(req.params.id)
       .then(rowsTeachers=>{
         res.render('editteacher',{dataTeachers: rowsTeachers,err_msg:'Format Email salah!'})
       })
     })
 })
 
+//------------------------------  ADD  --------------------------------
+router.get('/addteachers/', (req, res)=>{
+    res.render('addteachers',{err_msg:false})
+})
+
+router.post('/addteachers', (req, res)=>{
+
+    pret.Teacher.create({
+      first_name : req.body.first_name,
+      last_name : req.body.last_name,
+      email : req.body.email,
+      updatedAt : new Date(),
+      createdAt : new Date()
+
+  })
+  .then(rowsTeachers => {
+    res.redirect('/teachers')
+  })
+  .catch(err=>{
+    // console.log("ada error di get update student");
+      res.render('addteachers',{err_msg:'Format Email salah!'})
+    })
+})
 
 //-------------------------------DELETE--------------------------------
 router.get('/delete/:id', (req, res)=>{

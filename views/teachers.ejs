@@ -24,24 +24,27 @@
             <td><%= z.first_name %></td>
             <td><%= z.last_name %></td>
             <td><%= z.email %></td>
-            <td><%=  %></td>
-            <td><a href="/teachers/edit/<%=z.id%>">Edit</a> | <a href="/teachers/delete/<%=z.id%>"onclick="return confirm('Delete this Data?');">Delete</a> </td>
+            <td><%= z.subject == null ? 'unassign' : z.subject %></td>
+            <td><a href="/teachers/edit/<%=z.id%>">Edit</a> | <a href="/teachers/delete/<%=z.id%>"onclick="deleteItem(<%= z.id %>)">Delete</a> </td>
             <!-- <td><a href="/address/edit/<%=z.id%>">Edit</a></td>
             <td><a href="/address/delete/<%=z.id%>">Delete</a></td> -->
           </tr>
         <% })%>
       </tbody>
     </table>
-    <br><br>
-    <!-- <form action="/address" method="post">
-      <fieldset>
-        <input type="text" name="street" placeholder="Input street"><br>
-        <input type="text" name="city" placeholder="Input city"><br>
-        <input type="text" name="zip_code" placeholder="Input zip_code"><br>
+    <br>
+    <a href="/teachers/addteachers">Add</a>
+    <br>
 
-        <button type="submit">save</button>
-      </fieldset>
-    </form> -->
+    <script type="text/javascript">
+      function deleteItem(id) {
+        if (window.confirm('Delete this data?')){
+          document.location.href = `teachers/delete/${id}`
+        }
+        return false;
+      }
+    </script>
+
     <br><br>
     <a href="/">Home</a>
   </body>

@@ -2,15 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Edit Student</title>
+    <title>Edit Teachers</title>
   </head>
-  <h1>Edit Student Data</h1>
+  <h1>Edit Teacher Data</h1>
   <body>
     <form  action="/teachers/edit/<%= dataTeachers.id %>" method="post">
       <input type="text" name="first_name" value="<%=dataTeachers.first_name%>"><br>
       <input type="text" name="last_name" value="<%=dataTeachers.last_name%>"><br>
       <input type="text" name="email" value="<%=dataTeachers.email%>"><br><br>
-      <button type="submit">Edit Student</button>
+      <button type="submit">Edit Teacher</button>
     </form>
   </body>
   <% if(err_msg){ %>
