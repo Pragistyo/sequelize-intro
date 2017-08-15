@@ -24,7 +24,7 @@
             <td><%= z.first_name %></td>
             <td><%= z.last_name %></td>
             <td><%= z.email %></td>
-            <td><%= z.subject == null ? 'unassign' : z.subject %></td>
+            <td><%= z.Subject != undefined ? z.Subject.subject_name : 'unassign' %></td>
             <td><a href="/teachers/edit/<%=z.id%>">Edit</a> | <a href="/teachers/delete/<%=z.id%>"onclick="deleteItem(<%= z.id %>)">Delete</a> </td>
             <!-- <td><a href="/address/edit/<%=z.id%>">Edit</a></td>
             <td><a href="/address/delete/<%=z.id%>">Delete</a></td> -->

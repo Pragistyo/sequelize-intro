@@ -13,7 +13,12 @@
         <input type="text" name="first_name" placeholder="Input your First Name"><br>
         <input type="text" name="last_name" placeholder="Input your Last Name"><br>
         <input type="text" name="email" placeholder="Input your Email"><br>
-        <input type="text" name="subject_id" placeholder="Input Subject"><br>
+
+        <select name="subjectId">
+        <%dataSubjects.forEach(z=> { %>
+        <option value="<%= z.id %>"><%= z.subject_name %></option>
+        <% })%>
+        </select>
 
         <button type="submit">Add teachers</button>
       </fieldset>

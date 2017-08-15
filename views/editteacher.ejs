@@ -9,7 +9,14 @@
     <form  action="/teachers/edit/<%= dataTeachers.id %>" method="post">
       <input type="text" name="first_name" value="<%=dataTeachers.first_name%>"><br>
       <input type="text" name="last_name" value="<%=dataTeachers.last_name%>"><br>
-      <input type="text" name="email" value="<%=dataTeachers.email%>"><br><br>
+      <input type="text" name="email" value="<%=dataTeachers.email%>"><br>
+      <br>
+      <select name="subjectId">
+      <%dataSubjects.forEach(z=> { %>
+      <option value="<%= z.id %>"><%= z.subject_name %></option>
+      <% })%>
+      </select>
+
       <button type="submit">Edit Teacher</button>
     </form>
   </body>

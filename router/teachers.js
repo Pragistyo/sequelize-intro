@@ -1,14 +1,29 @@
 const express = require('express');
 const router = express.Router();
 
-const pret = require('../models');
+const dbs = require('../models');
+
+//------------------------------SESSION PROTECTION----------------------------
+
+router.use((req,res,next)=>{
+  if(req.session.role === 'headmaster' && (req.session.Login)){
+    next()
+  }
+  else{
+    res.redirect('/')
+  }
+})
 
 
 //-------------------------------GET DATA AWAL--------------------------
 router.get('/', (req, res)=>{
-  pret.Teacher.findAll()
+  dbs.Teacher.findAll({include:[dbs.Subjects]})
   .then(rowsTeachers=>{
-    // res.send('ogi')
+    // for (var i = 0; i < rowsTeachers.length; i++) {
+    //   if(rowsTeachers[i].Subject.subject_name!= undefined){
+    //     rowsTeachers[i].subject= rowsTeachers[i].Subject.subject_name
+    //   }// res.send(rowsTeachers[0].Subject.subject_name)
+    // }
     res.render('teachers',{dataTeachers: rowsTeachers})
   })
 })
@@ -17,12 +32,13 @@ router.get('/', (req, res)=>{
 //-----------------------------------EDIT--------------------------------
 
 router.get('/edit/:id', (req, res)=>{
-  pret.Teacher.findById(req.params.id)
+  dbs.Teacher.findById(req.params.id)
   .then(rowsTeachers=>{
-    // rowsStudents['full_name']=
-    // res.send('ogi')
-    res.render('editteacher',{dataTeachers: rowsTeachers,err_msg:false, mail:false})
-    // console.log(dataStudents);
+    dbs.Subjects.findAll()
+    .then(rowsSubjects=>{
+      // res.send(rowsSubjects)
+      res.render('editteacher',{dataTeachers: rowsTeachers,dataSubjects:rowsSubjects,err_msg:false})
+    })
   })
   .catch(err=>{
     console.log("ada error di get edit teacher");
@@ -31,40 +47,49 @@ router.get('/edit/:id', (req, res)=>{
 
 router.post('/edit/:id', (req, res)=>{
 
-    pret.Teacher.update({
-      first_name : req.body.first_name,
-      last_name : req.body.last_name,
-      email : req.body.email,
-      updatedAt : new Date(),
-      createdAt : new Date()
-    },{
-      where:{id: req.params.id}
-    })
+        dbs.Teacher.update({
+          first_name : req.body.first_name,
+          last_name : req.body.last_name,
+          email : req.body.email,
+          subjectId: req.body.subjectId,
+          updatedAt : new Date(),
+          createdAt : new Date()
+        },{
+          where:{id: req.params.id}
+        })
 
-    .then(rowsTeachers =>{
-      res.redirect('/teachers')
-      })
+        .then(rowsTeachers =>{
+          res.redirect('/teachers')
+          // res.send(rowsTeachers)
 
-    .catch(err=>{
-      // console.log("ada error di get update student");
-      pret.Student.findById(req.params.id)
-      .then(rowsTeachers=>{
-        res.render('editteacher',{dataTeachers: rowsTeachers,err_msg:'Format Email salah!'})
-      })
+          })
+
+        .catch(err=>{
+          // console.log("ada error di get update student");
+          dbs.Teacher.findById(req.params.id)
+          .then(rowsTeachers=>{
+            // res.send(err)
+            res.render('editteacher',{dataTeachers: rowsTeachers, err_msg: err.errors[0].message})
+          })
     })
-})
+  })
 
 //------------------------------  ADD  --------------------------------
 router.get('/addteachers/', (req, res)=>{
-    res.render('addteachers',{err_msg:false})
+  dbs.Subjects.findAll()
+  .then(rowsSubjects=>{
+    res.render('addteachers',{dataSubjects:rowsSubjects,err_msg:false})
+  })
 })
+
 
 router.post('/addteachers', (req, res)=>{
 
-    pret.Teacher.create({
+    dbs.Teacher.create({
       first_name : req.body.first_name,
       last_name : req.body.last_name,
       email : req.body.email,
+      subjectId : req.body.subjectId,
       updatedAt : new Date(),
       createdAt : new Date()
 
@@ -80,7 +105,7 @@ router.post('/addteachers', (req, res)=>{
 
 //-------------------------------DELETE--------------------------------
 router.get('/delete/:id', (req, res)=>{
-  pret.Teacher.destroy({
+  dbs.Teacher.destroy({
     where: {
       id : req.params.id
     }

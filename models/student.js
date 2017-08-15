@@ -1,4 +1,3 @@
-'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Student = sequelize.define('Student', {
     first_name: DataTypes.STRING,
@@ -6,25 +5,22 @@ module.exports = function(sequelize, DataTypes) {
     email: {
     type:      DataTypes.STRING,
     allowNull: false,
-    unique:
-    {
-      args:true,
-      msg: 'Email already taken !!'
+    unique:{
+      msg: 'The email you entered is already in our system'
     },
     validate:  {
       isEmail: {
                     args: true,
-                    msg: 'The email you entered is invalid or is already in our system.'
+                    msg: 'The email you entered is invalid.'
                 },
       }
     },
     full_name: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
   });
+
+  Student.associate = models => {
+    Student.belongsToMany(models.Subjects, {through: 'student_subject'})
+    }
+
   return Student;
 };

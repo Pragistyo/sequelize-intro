@@ -14,6 +14,7 @@
           <th>Last Name</th>
           <th>Full Name</th>
           <th>Email</th>
+          <th>Action</th>
           <th>Option</th>
         </tr>
       </thead>
@@ -25,6 +26,7 @@
             <td><%= z.last_name %></td>
             <td><%= z.full_name %></td>
             <td><%= z.email %></td>
+            <td><a href="/students/addsubject/<%=z.id%>">Add Subject</a>
             <td><a href="/students/edit/<%=z.id%>">Edit</a> | <a href="/students/delete/<%=z.id%>"onclick="return confirm('delete this student?');">Delete</a> </td>
 
           </tr>
@@ -32,7 +34,7 @@
       </tbody>
     </table>
     <br>
-    <a href="/students/addstudents">Add</a>
+    <a href="/students/addstudents">Add Student</a>
     <br>
     <!-- <form action="/address" method="post">
       <fieldset>

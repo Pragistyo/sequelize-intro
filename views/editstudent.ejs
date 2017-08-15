@@ -13,8 +13,9 @@
       <button type="submit">Edit Student</button>
     </form>
   </body>
-  <% if(err_msg){ %>
-    <p> <%= err_msg %></p>
+  <% if(err){ %>
+    <p> <%= err %></p>
   <% } %>
+  
   <a href="/students">Back</a>
 </html>

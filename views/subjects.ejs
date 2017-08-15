@@ -19,7 +19,13 @@
           <tr>
             <td><%= z.id %></td>
             <td><%= z.subject_name %></td>
-            <td><%=      %>  <%=      %></td>
+            <% if (z.Teachers){ %>
+            <%  z.Teachers.forEach(ogi=>{ %>
+            <td><%=`${ogi.first_name} ${ogi.last_name}`%></td>
+          <%  }) %>
+          <%  } %>
+
+            <td><%= z.Teachers.first_name %></td>
             <!-- <td><a href="/subjects/edit/<%=z.id%>">Edit</a></td>
             <td><a href="/subjects/delete/<%=z.id%>">Delete</a></td> -->
           </tr>
