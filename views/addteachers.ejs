@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Teachers</title>
+  </head>
+  <body>
+    <h1>Add Teachers</h1>
+
+    <br><br>
+    <form action="/teachers/addteachers" method="post">
+      <fieldset>
+        <input type="text" name="first_name" placeholder="Input your First Name"><br>
+        <input type="text" name="last_name" placeholder="Input your Last Name"><br>
+        <input type="text" name="email" placeholder="Input your Email"><br>
+
+        <select name="subjectId">
+        <%dataSubjects.forEach(z=> { %>
+        <option value="<%= z.id %>"><%= z.subject_name %></option>
+        <% })%>
+        </select>
+
+        <button type="submit">Add teachers</button>
+      </fieldset>
+    </form>
+    <br>
+    <% if(err_msg){ %>
+      <p> <%= err_msg %></p>
+    <% } %>
+    <br>
+    <a href="/teachers">Show All Data</a>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Subjects</title>
+  </head>
+  <body>
+    <h1>Subjects Data</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject Name</th>
+          <th>Teachers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%dataSubjects.forEach(z=> { %>
+          <tr>
+            <td><%= z.id %></td>
+            <td><%= z.subject_name %></td>
+            <% if (z.Teachers){ %>
+            <%  z.Teachers.forEach(ogi=>{ %>
+            <td><%=`${ogi.first_name} ${ogi.last_name}`%></td>
+          <%  }) %>
+          <%  } %>
+
+            <td><%= z.Teachers.first_name %></td>
+            <!-- <td><a href="/subjects/edit/<%=z.id%>">Edit</a></td>
+            <td><a href="/subjects/delete/<%=z.id%>">Delete</a></td> -->
+          </tr>
+        <% })%>
+      </tbody>
+    </table>
+    <br><br>
+    <!-- <form action="/address" method="post">
+      <fieldset>
+        <input type="text" name="street" placeholder="Input street"><br>
+        <input type="text" name="city" placeholder="Input city"><br>
+        <input type="text" name="zip_code" placeholder="Input zip_code"><br>
+
+        <button type="submit">save</button>
+      </fieldset>
+    </form> -->
+    <br><br>
+    <a href="/">Home</a>
+  </body>
+</html>
